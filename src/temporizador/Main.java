@@ -9,17 +9,18 @@ package temporizador;
  *
  * @author User
  */
-public class Temporizador {
+public class Main {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        Crono temp =new Crono();
+        Cronometro cro = new Cronometro();
+        cro.show();
+       /* Crono temp =new Crono();
         temp.timeTeporiza("0:15", 2, 2);
-        temp.start();
+        temp.start();*/
     }
     
 }

@@ -5,7 +5,7 @@
  */
 package temporizador;
 
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -22,8 +22,13 @@ public class Crono extends Thread{
     private int rondas;
     private int auxron=0;
     private boolean parar=true;
+    Cronometro cr;
             
-            
+    public Crono(Cronometro g){
+        this.cr=g;
+    }
+    
+    
      @Override
     public void run() {
         animar();      
@@ -52,8 +57,9 @@ public class Crono extends Thread{
                     minutes=0;
                     seconds=0;
                     auxBreak ++;
-                }  
-                System.out.println(minutes+":"+seconds);
+                }
+                cr.getjLabel2().setText(minutes+":"+seconds);
+                System.out.println();
             }else{
                 System.out.println("descanso"+minutes+":"+seconds);
                 if (auxBreak==time_break){
