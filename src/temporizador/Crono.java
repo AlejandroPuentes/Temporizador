@@ -5,6 +5,8 @@
  */
 package temporizador;
 
+import java.awt.Color;
+
 
 
 /**
@@ -21,11 +23,12 @@ public class Crono extends Thread{
     private int timeMinutes;
     private int rondas;
     private int auxron=0;
-    private boolean parar=true;
+    private boolean terminar;
     Cronometro cr;
             
     public Crono(Cronometro g){
         this.cr=g;
+        this.terminar = false;
     }
     
     
@@ -43,7 +46,8 @@ public class Crono extends Thread{
     }
     
     public void animar(){
-        while (parar){
+        cr.setVisible(true);
+        while (!terminar){
             if (auxBreak==0){
                 if (seconds <60){
                 seconds ++;
@@ -58,10 +62,11 @@ public class Crono extends Thread{
                     seconds=0;
                     auxBreak ++;
                 }
-                cr.getjLabel2().setText(minutes+":"+seconds);
-                System.out.println();
+                cr.getLblCrono().setForeground(Color.BLACK);
+                cr.getLblCrono().setText(minutes+":"+seconds);
             }else{
-                System.out.println("descanso"+minutes+":"+seconds);
+                cr.getLblCrono().setForeground(Color.RED);
+                cr.getLblCrono().setText(minutes+":"+seconds);
                 if (auxBreak==time_break){
                     auxron++;
                     auxBreak=0;
@@ -70,8 +75,8 @@ public class Crono extends Thread{
                     auxBreak++;
                 }
                 if(auxron==rondas){
-                    parar=false;
-                    //JOptionPane.showMessageDialog(null, "HA TERMINADO TU TIEMPO");
+                    terminar = true;
+                    cr.getLblCrono().setText("00:00");
                 } 
             }
             try {
