@@ -6,6 +6,7 @@
 package temporizador;
 
 import java.awt.Color;
+import javax.sound.sampled.LineUnavailableException;
 
 
 
@@ -24,11 +25,14 @@ public class Crono extends Thread{
     private int rondas;
     private int auxron=0;
     private boolean terminar;
+    boolean parar = false;
     Cronometro cr;
+    Sonido sound;
             
-    public Crono(Cronometro g){
+    public Crono(Cronometro g) throws LineUnavailableException{
         this.cr=g;
         this.terminar = false;
+        sound = new Sonido();
     }
     
     
@@ -48,37 +52,52 @@ public class Crono extends Thread{
     public void animar(){
         cr.setVisible(true);
         while (!terminar){
-            if (auxBreak==0){
-                if (seconds <60){
-                seconds ++;
-                }else{
-                    if (seconds==60){
-                        seconds=0;
-                        minutes++;
+            cr.getLblImage().setForeground(Color.BLUE);
+            cr.getLblImage().setText(auxron+1+"");
+            if (parar==false){
+                if (auxBreak==0){
+                    if (seconds <60){
+                    seconds ++;
+                    }else{
+                        if (seconds==60){
+                            seconds=0;
+                            minutes++;
+                        }
                     }
-                }
-                if(minutes==timeMinutes && seconds==timeSeconds){
-                    minutes=0;
-                    seconds=0;
-                    auxBreak ++;
-                }
-                cr.getLblCrono().setForeground(Color.BLACK);
-                cr.getLblCrono().setText(minutes+":"+seconds);
-            }else{
-                cr.getLblCrono().setForeground(Color.RED);
-                cr.getLblCrono().setText(minutes+":"+seconds);
-                if (auxBreak==time_break){
-                    auxron++;
-                    auxBreak=0;
-                }else{
                     
-                    auxBreak++;
+                    cr.getLblCrono().setForeground(Color.BLACK);
+                    cr.getLblCrono().setText(minutes+":"+seconds);
+                    if(minutes==timeMinutes && seconds==timeSeconds){
+                        minutes=0;
+                        seconds=0;
+                        auxBreak ++;
+                        sound.Break();
+                        
+                    }
+                }else{
+                    cr.getLblCrono().setForeground(Color.RED);
+                    cr.getLblCrono().setText("Break");
+                    
+                    if (auxBreak==time_break){
+                        auxron++;
+                        auxBreak=0;
+                        sound.Break();
+                    }else{
+                        if(time_break-auxBreak <4){
+                            sound.tic();
+                        }
+                        auxBreak++;
+                    }
+                    if(auxron==rondas){
+                        terminar = true;
+                        cr.getLblCrono().setText("00:00");
+                        sound.finish();
+                    } 
                 }
-                if(auxron==rondas){
-                    terminar = true;
-                    cr.getLblCrono().setText("00:00");
-                } 
+            }else{
+                
             }
+            
             try {
                 Crono.sleep(1000);
             }catch(InterruptedException e) {
