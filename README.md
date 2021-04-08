@@ -11,6 +11,14 @@
 <h2>Descripción del proyecto</h2>
 <p>Temporizador para ejercicios estilo EMOM diseñado y codificado en lenguaje Java, realizado mediante el modelo de proceso Big Bang.</p>
 
+<h2>Herramientas</h2>
+<ul>
+  <li>Java Swing</li>
+  <li>Java Sound</li>
+  <li>Java IO</li>
+  <li>Archivos de Audio</li>
+ </ul>
+
 <h2>Experiencia</h2>
 <p>La experiencia que tuvimos manejando este modelo de proceso fue un tanto confusa, 
 ya que al no realizar un estudio del proyecto antes de empezar a modelarlo en un lenguaje de programación hace que a medida que se va codificando, 
