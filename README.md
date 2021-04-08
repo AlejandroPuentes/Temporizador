@@ -20,7 +20,7 @@ hay que realizar pruebas y buscar las herramientas que aseguren un correcto func
 
 <h2>Demostración</h2>
 <div>
-  <p style="text-align: center;">
+  <p style='text-align: center;'>
     <img src="https://user-images.githubusercontent.com/62530365/114047280-2ecda700-984f-11eb-9fe2-98c96c826861.jpg" alt="Demo Temporizador" width="300px">
   </p>
 </div>
